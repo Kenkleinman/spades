@@ -1,0 +1,74 @@
+---
+title: "randSC Manual"
+subtitle: "v.`r SpaDES.core::moduleMetadata(module = 'randSC', path = '..')$version`"
+date: "Last updated: `r Sys.Date()`"
+output:
+  bookdown::html_document2:
+    toc: true
+    toc_float: true
+    theme: sandstone
+    number_sections: false
+    df_print: paged
+    keep_md: yes
+editor_options:
+  chunk_output_type: console
+  bibliography: citations/references_randSC.bib
+citation-style: citations/ecology-letters.csl
+link-citations: true
+always_allow_html: true
+---
+
+# randSC Module
+
+<!-- the following are text references used in captions for LaTeX compatibility -->
+(ref:randSC) *randSC*
+
+```{r setup-randSC, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE, results = "hold") ## change to eval = TRUE if all chunks are to be evaluated
+
+## get citation style
+if (!file.exists("citations/ecology-letters.csl")) {
+  dir.create("citations", showWarnings = FALSE)
+  download.file("https://www.zotero.org/styles/ecology-letters", destfile = "citations/ecology-letters.csl")
+}
+
+if (!require(dplyr)) {
+  install.packages("dplyr")
+  library(dplyr)
+}
+
+dir.create("figures", showWarnings = FALSE)
+
+download.file(url = "https://img.shields.io/badge/Made%20with-Markdown-1f425f.png",
+              destfile = "figures/markdownBadge.png",
+              mode = 'wb')
+```
+
+[![made-with-Markdown](figures/markdownBadge.png)](http://commonmark.org)
+
+<!-- if knitting to pdf remember to add the pandoc_args: ["--extract-media", "."] option to yml in order to get the badge images -->
+
+#### Authors:
+
+`r paste(as.character(SpaDES.core::moduleMetadata(module = "randSC", path = '..')$authors), sep = ', ')`
+<!-- ideally separate authors with new lines, '\n' not working -->
+Ken Kleinman
+
+
+## Module Overview
+
+The purpose of this module is to read data in.
+
+Currently there are two sources of data:
+
+1. SPIRE pull, which has been read from Excel sand saved in an R data set.  We drop many columns and omit grad students and a few weird undergrads.
+2. Financial aid data, which lives in an Excel data set
+
+These are read in as "input objects" in the spades idiom.
+
+In the "Initialization" step, the data which has been read in is processed:
+1. The SPIRE data is is massaged to generate the N in each School/college (10? rows).  Also by year (freshman, sophomore, junior, senior, as determined by Krisztina Filep's group, i.e., by SPIRE) and by residency (in state, out of state, international, also from SPIRE) making 12 columns.  This goes in sim$nspire
+2. finaid is processed to get the number of students getting financial aid.  This goes in sim$ n.finaid.
+
+
+There is at present a weird and useless little report, demonstrating this is possible.

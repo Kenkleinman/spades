@@ -1,0 +1,74 @@
+---
+title: "useSPIRE Manual"
+subtitle: "v.`r SpaDES.core::moduleMetadata(module = 'useSPIRE', path = '..')$version`"
+date: "Last updated: `r Sys.Date()`"
+output:
+  bookdown::html_document2:
+    toc: true
+    toc_float: true
+    theme: sandstone
+    number_sections: false
+    df_print: paged
+    keep_md: yes
+editor_options:
+  chunk_output_type: console
+  bibliography: citations/references_useSPIRE.bib
+citation-style: citations/ecology-letters.csl
+link-citations: true
+always_allow_html: true
+---
+
+# useSPIRE Module
+
+<!-- the following are text references used in captions for LaTeX compatibility -->
+(ref:useSPIRE) *useSPIRE*
+
+```{r setup-useSPIRE, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE, results = "hold") ## change to eval = TRUE if all chunks are to be evaluated
+
+## get citation style
+if (!file.exists("citations/ecology-letters.csl")) {
+  dir.create("citations", showWarnings = FALSE)
+  download.file("https://www.zotero.org/styles/ecology-letters", destfile = "citations/ecology-letters.csl")
+}
+
+if (!require(dplyr)) {
+  install.packages("dplyr")
+  library(dplyr)
+}
+
+dir.create("figures", showWarnings = FALSE)
+
+download.file(url = "https://img.shields.io/badge/Made%20with-Markdown-1f425f.png",
+              destfile = "figures/markdownBadge.png",
+              mode = 'wb')
+```
+
+[![made-with-Markdown](figures/markdownBadge.png)](http://commonmark.org)
+
+<!-- if knitting to pdf remember to add the pandoc_args: ["--extract-media", "."] option to yml in order to get the badge images -->
+
+#### Authors:
+
+`r paste(as.character(SpaDES.core::moduleMetadata(module = "useSPIRE", path = '..')$authors), sep = ', ')`
+<!-- ideally separate authors with new lines, '\n' not working -->
+
+Ken Kleinman
+
+## Module Overview
+
+This module is where we use the results of the other modules to 
+
+Init only schedules Results.
+
+Results calls splitarpa, which lives in useSPIRE/R.
+
+splitarpa counts the N of students who are "splitters" and those who would be using the arpa benefits.
+
+
+
+
+
+
+
+
