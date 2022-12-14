@@ -99,9 +99,16 @@ restrial %>% filter(substr(row.names(.),1,4) == "Inte") %>%
 
 respire <- mysim$respire
 
-respire %>% select(`Tuition Residency Group`, finaid.yn, amount, prob) %>% unique()  %>%  
+respire %>% select(`Tuition Residency Group`, 
+                   finaid.yn, amount, prob) %>% unique()  %>%  
   group_by(`Tuition Residency Group`) %>% 
   summarize(meanprop = mean(finaid.yn), meanamt = mean(amount), meanprob = mean(prob))
+
+respire %>% select(`Tuition Residency Group`, finaid.yn, amount, prob, 
+                   `Course School/College Short`, newid) %>% unique()  %>%  
+  group_by(`Tuition Residency Group`, `Course School/College Short`) %>% 
+  summarize(meanprop = mean(finaid.yn), meanamt = mean(amount), meanprob = mean(prob)) %>%
+  print(n=31)
 
 respire %>% select(`Tuition Residency Group`, finaid.yn, amount) %>% unique()  %>%  
   filter(finaid.yn == 0) %>% head
