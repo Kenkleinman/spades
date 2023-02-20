@@ -1,7 +1,5 @@
 ## start again from a clean R session
 
-## Testing
-
 if (!require("Require")) install.packages("Require")
 
 
