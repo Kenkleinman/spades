@@ -62,7 +62,6 @@ mySim <- simInit(times = simTimes, params = simParams,
 #objectDiagram(mySim)
 
 # this actually runs the simulation (once)
-#mysim <- spades(mySim,debug=TRUE)
 a <- Sys.time()
 mysim <- spades(mySim)
 b <- Sys.time()
